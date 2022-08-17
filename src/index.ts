@@ -20,7 +20,8 @@ function defaultConfigFn(names: readonly string[]): Record<string, string> {
 
 /**
  * Late-binding configuration for how analytics keys are generated. This is to
- * support a different analytics attribute or separator
+ * support a different analytics attribute or separator, or to selectively not
+ * print certain keys.
  */
 const AnalyticsContext = createContext<ConfigFn>(defaultConfigFn);
 
@@ -30,9 +31,6 @@ export function useAnalyticsStack() {
   return useStack();
 }
 
-/**
- * Docs tbd
- */
 export function useAnalyticsKeyBuilder(name?: string): KeyBuilderFn {
   const stack = useAnalyticsStack();
   const generator = useContext(AnalyticsContext);
@@ -51,21 +49,24 @@ export function useAnalyticsKeyBuilder(name?: string): KeyBuilderFn {
   return useCallback(analyticsKeyBuilder, [stack, generator]);
 }
 
-interface AnalyticsStackProps {
-  /**
-   * Docs tbd
-   */
-  value?: string;
-  children: ReactNode;
+export function useAnalyticsKey(): Record<string, string> {
+  const stack = useAnalyticsStack();
+  const generator = useContext(AnalyticsContext);
+
+  const generatedAttributes = generator(stack);
+  if (!generatedAttributes) return {};
+  return generatedAttributes;
 }
 
-/**
- * Docs tbd
- */
+export interface AnalyticsNodeProps {
+  value?: string;
+  children?: ReactNode;
+}
+
 export function AnalyticsNode({
   value,
   children,
-}: AnalyticsStackProps): ReactElement {
+}: AnalyticsNodeProps): ReactElement {
   if (!value) return createElement(Fragment, null, children);
   else return createElement(Stack, { value, children });
 }

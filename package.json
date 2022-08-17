@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "description": "Easily create unique analytics key ids based on document structure",
   "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nhusher/react-analytics-keys.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nhusher/react-analytics-keys/issues"
+  },
+  "homepage": "https://github.com/nhusher/react-analytics-keys",
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf dist/",
@@ -33,6 +41,6 @@
     "react": ">16.3"
   },
   "dependencies": {
-    "react-context-stack": "^1.0.1"
+    "react-context-stack": "^1.0.2"
   }
 }

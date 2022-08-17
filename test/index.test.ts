@@ -70,7 +70,9 @@ describe("useAnalyticsKeyBuilder", () => {
       children: ReactNode
     ) =>
       createElement(AnalyticsContextProvider, {
-        value: (names: readonly string[]) => ({ 'data-heap': names.join('::') }),
+        value: (names: readonly string[]) => ({
+          "data-heap": names.join("::"),
+        }),
         children,
       });
 
