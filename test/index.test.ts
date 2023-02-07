@@ -1,6 +1,6 @@
 require("jsdom-global")();
 
-import { cleanup, renderHook } from "@testing-library/react";
+import { cleanup, renderHook, render } from "@testing-library/react";
 import { ReactNode, createElement } from "react";
 import { deepStrictEqual } from "assert";
 import {

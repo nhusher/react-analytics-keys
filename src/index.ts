@@ -49,15 +49,6 @@ export function useAnalyticsKeyBuilder(name?: string): KeyBuilderFn {
   return useCallback(analyticsKeyBuilder, [stack, generator]);
 }
 
-export function useAnalyticsKey(): Record<string, string> {
-  const stack = useAnalyticsStack();
-  const generator = useContext(AnalyticsContext);
-
-  const generatedAttributes = generator(stack);
-  if (!generatedAttributes) return {};
-  return generatedAttributes;
-}
-
 export interface AnalyticsNodeProps {
   value?: string;
   children?: ReactNode;
